@@ -7,7 +7,6 @@ import com.jury.rules.exceptions.UnknownLogicException;
 import com.jury.rules.exceptions.UnknownOperatorException;
 import com.jury.rules.parameters.Parameter;
 
-// R is the type of the return value
 public class Rule<R> {
 
 	private Criteria criteria;
