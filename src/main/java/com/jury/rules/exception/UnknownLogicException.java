@@ -1,4 +1,4 @@
-package com.jury.rules.exceptions;
+package com.jury.rules.exception;
 
 public class UnknownLogicException extends RuleException {
 

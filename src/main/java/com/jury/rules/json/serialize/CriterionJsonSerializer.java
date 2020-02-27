@@ -1,4 +1,4 @@
-package com.jury.rules.json;
+package com.jury.rules.json.serialize;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -7,7 +7,7 @@ import com.jury.rules.evaluation.Criterion;
 
 import java.io.IOException;
 
-public class CriterionSerializer extends JsonSerializer<Criterion<?>> {
+public class CriterionJsonSerializer extends JsonSerializer<Criterion<?>> {
 
 	@Override
 	public void serialize(Criterion<?> criterion, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {

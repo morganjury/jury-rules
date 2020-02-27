@@ -1,7 +1,7 @@
 package com.jury.rules.evaluation;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.jury.rules.json.FieldJsonSerializer;
+import com.jury.rules.json.serialize.FieldJsonSerializer;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ public class Field<T> {
 	public static final Field<Integer> TIME_MINUTE = new Field<>("Time_Minute", Integer.class);
 	public static final Field<Integer> TIME_SECOND = new Field<>("Time_Second", Integer.class);
 	public static final Field<Double> PRICE = new Field<>("Price", Double.class);
+	public static final Field<Double> LENGTH = new Field<>("Length", Double.class);
 
 	private String name;
 	private Class<T> clazz;

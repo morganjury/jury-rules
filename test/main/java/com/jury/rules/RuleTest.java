@@ -1,10 +1,11 @@
 package com.jury.rules;
 
 import com.jury.rules.evaluation.*;
-import com.jury.rules.exceptions.RuleException;
-import com.jury.rules.parameters.Parameter;
-import com.jury.rules.parameters.ParameterMap;
-import com.jury.rules.parameters.ParameterObject;
+import com.jury.rules.exception.RuleException;
+import com.jury.rules.parameter.Parameter;
+import com.jury.rules.parameter.ParameterMap;
+import com.jury.rules.parameter.ParameterObject;
+import com.jury.transform.impl.JsonTransformer;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -123,6 +124,18 @@ public class RuleTest {
 		} catch (Exception e) {
 			assertTrue(e instanceof RuleException);
 		}
+	}
+
+	@Test
+	public void testJson() {
+		ParameterMap<String, String> parameterMap = new ParameterMap<>();
+		parameterMap.put(Field.NAME.getName(), "someone@somewhere.com");
+		Criterion<String> nameEquals = new Criterion<>(Field.NAME, Operator.EQUALS, "someone@somewhere.com");
+		Rule<String> rule = new Rule<>(nameEquals, SUCCESS_MESSAGE);
+		JsonTransformer<Rule> ruleJsonTransformer = new JsonTransformer<>(Rule.class);
+		String json = ruleJsonTransformer.consume(rule);
+		Rule result = ruleJsonTransformer.produce(json);
+		assertEquals(SUCCESS_MESSAGE, result.evaluate(parameterMap));
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.jury.rules.json;
+package com.jury.rules.json.serialize;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

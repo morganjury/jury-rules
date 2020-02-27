@@ -10,7 +10,8 @@ public enum Operator {
 	GREATER_THAN(false, true),
 	STARTS_WITH(true, false),
 	ENDS_WITH(true, false),
-	EQUALS(true, true);
+	EQUALS(true, true),
+	NOT_EQUALS(true, true);
 
 	private boolean appliesToStrings;
 	private boolean appliesToNumbers;

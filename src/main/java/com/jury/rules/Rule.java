@@ -1,20 +1,32 @@
 package com.jury.rules;
 
 import com.jury.rules.evaluation.*;
-import com.jury.rules.exceptions.OperatorException;
-import com.jury.rules.exceptions.RuleException;
-import com.jury.rules.exceptions.UnknownLogicException;
-import com.jury.rules.exceptions.UnknownOperatorException;
-import com.jury.rules.parameters.Parameter;
+import com.jury.rules.exception.OperatorException;
+import com.jury.rules.exception.RuleException;
+import com.jury.rules.exception.UnknownLogicException;
+import com.jury.rules.exception.UnknownOperatorException;
+import com.jury.rules.parameter.Parameter;
 
 public class Rule<R> {
 
 	private Criteria criteria;
 	private R response;
 
+	public Rule() {
+
+	}
+
 	public Rule(Criteria criteria, R response) {
 		this.criteria = criteria;
 		this.response = response;
+	}
+
+	public Criteria getCriteria() {
+		return criteria;
+	}
+
+	public R getResponse() {
+		return response;
 	}
 
 	public <T> R evaluate(Parameter<T> parameter) {
@@ -73,6 +85,8 @@ public class Rule<R> {
 					return (a,b) -> Double.parseDouble(String.valueOf(a)) > Double.parseDouble(String.valueOf(b));
 				case EQUALS:
 					return (a,b) -> Double.parseDouble(String.valueOf(a)) == Double.parseDouble(String.valueOf(b));
+				case NOT_EQUALS:
+					return (a,b) -> Double.parseDouble(String.valueOf(a)) != Double.parseDouble(String.valueOf(b));
 			}
 		}
 		if (field.isString()) {
@@ -83,6 +97,8 @@ public class Rule<R> {
 					return (a,b) -> String.valueOf(a).endsWith(String.valueOf(b));
 				case EQUALS:
 					return (a,b) -> String.valueOf(a).equals(String.valueOf(b));
+				case NOT_EQUALS:
+					return (a,b) -> !String.valueOf(a).equals(String.valueOf(b));
 			}
 		}
 		throw new UnknownOperatorException();

@@ -1,5 +1,7 @@
 package com.jury.rules.evaluation;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,12 +33,13 @@ public class Criterion<T> implements Criteria {
 		return value;
 	}
 
+	@JsonBackReference
 	public Set<Criteria> getCriteria() {
 		return new HashSet<>(Collections.singletonList(this));
 	}
 
 	public Logic getLogic() {
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 }

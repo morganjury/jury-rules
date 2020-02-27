@@ -1,7 +1,7 @@
-package com.jury.rules.parameters;
+package com.jury.rules.parameter;
 
 import com.jury.rules.evaluation.Field;
-import com.jury.rules.exceptions.FieldMissingException;
+import com.jury.rules.exception.FieldMissingException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

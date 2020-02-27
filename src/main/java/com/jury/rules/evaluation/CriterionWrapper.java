@@ -1,9 +1,12 @@
 package com.jury.rules.evaluation;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.Set;
 
 public class CriterionWrapper implements Criteria {
 
+	@JsonManagedReference
 	private Set<Criteria> criteria;
 	private Logic logic;
 
