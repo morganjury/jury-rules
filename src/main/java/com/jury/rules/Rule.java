@@ -17,7 +17,7 @@ public class Rule<R> {
 		this.response = response;
 	}
 
-	public R evaluate(Parameter parameter) {
+	public <T> R evaluate(Parameter<T> parameter) {
 		if (evaluate(criteria, parameter)) {
 			return response;
 		} else {
@@ -25,7 +25,7 @@ public class Rule<R> {
 		}
 	}
 
-	private <T> boolean evaluate(Criteria criteria, Parameter param) {
+	private <T> boolean evaluate(Criteria criteria, Parameter<T> param) {
 		// stop condition
 		if (criteria instanceof Criterion) {
 			Criterion<T> criterion = (Criterion<T>) criteria;
@@ -52,16 +52,16 @@ public class Rule<R> {
 		}
 	}
 
-	private <T> boolean evaluateCriterion(Criterion<T> criterion, Parameter param) {
+	private <T> boolean evaluateCriterion(Criterion<T> criterion, Parameter<T> param) {
 		Field<T> field = criterion.getField();
 		T valueToEvaluate = param.getArg(field);
 		T valueToEvaluateAgainst = criterion.getValue();
 		Operator operator = criterion.getOperator();
-		if (field.getOperators().contains(operator)) {
-			Comparator<T> comparator = getComparator(field, operator);
-			return comparator.compare(valueToEvaluate, valueToEvaluateAgainst);
+		if (!field.getOperators().contains(operator)) {
+			throw new OperatorException("Operator " + operator.name() + " is not compatible with the field " + field.getName());
 		}
-		throw new OperatorException("Operator " + operator.name() + " is not compatible with the field " + field.getName());
+		Comparator<T> comparator = getComparator(field, operator);
+		return comparator.compare(valueToEvaluate, valueToEvaluateAgainst);
 	}
 
 	private <T> Comparator<T> getComparator(Field<T> field, Operator operator) {

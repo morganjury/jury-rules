@@ -40,7 +40,7 @@ public class RuleTest {
 		return parameter;
 	}
 
-	private void iteratePriceTimeCriteria(Parameter parameter) {
+	private <T> void iteratePriceTimeCriteria(Parameter<T> parameter) {
 		// price >= -1.5
 		Criterion<Double> priceCriteria1 = new Criterion<>(Field.PRICE, Operator.GREATER_THAN, -1.5);
 		Criterion<Double> priceCriteria2 = new Criterion<>(Field.PRICE, Operator.EQUALS, -1.5);
@@ -62,7 +62,7 @@ public class RuleTest {
 		assertEquals(SUCCESS_MESSAGE, rule.evaluate(parameter));
 	}
 
-	public static class TestParameterObject extends ParameterObject {
+	public static class TestParameterObject extends ParameterObject<String> {
 		private String variableName;
 		public TestParameterObject(String variableName) {
 			this.variableName = variableName;

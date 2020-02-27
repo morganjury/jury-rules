@@ -1,7 +1,11 @@
 package com.jury.rules.evaluation;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.jury.rules.json.FieldJsonSerializer;
+
 import java.util.List;
 
+@JsonSerialize(using = FieldJsonSerializer.class)
 public class Field<T> {
 
 	public static final Field<String> NAME = new Field<>("Name", String.class);
@@ -12,6 +16,10 @@ public class Field<T> {
 
 	private String name;
 	private Class<T> clazz;
+
+	public Field() {
+
+	}
 
 	public Field(String name, Class<T> clazz) {
 		this.name = name;
